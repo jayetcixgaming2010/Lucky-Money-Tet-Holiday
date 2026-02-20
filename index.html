@@ -4,303 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bốc Lì Xì Tết Bính Ngọ 2026 - Chúc Mừng Năm Mới!</title>
+  <link rel="icon" href="logo.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root {
-      --red-main: #c41e3a;
-      --red-dark: #991b1b;
-      --gold: #fbbf24;
-      --gold-dark: #d97706;
-      --yellow: #fef08a;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #b71c1c; /* fallback */
-      background-image:
-        radial-gradient(1200px 600px at -10% 10%, rgba(251,191,36,0.12), transparent 20%),
-        radial-gradient(800px 400px at 110% 90%, rgba(255,255,255,0.06), transparent 20%),
-        linear-gradient(135deg, #b91c1c 0%, #c41e3a 40%, #e11d48 60%, #ff5858 100%),
-        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 20px);
-      background-blend-mode: overlay, screen, normal, overlay;
-      background-attachment: fixed;
-      color: white;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-      transition: background 0.6s ease;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      animation: bg-move 25s linear infinite;
-    }
-
-    /* subtle overlay lights */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background-image:
-        radial-gradient(circle at 18% 8%, rgba(255,223,110,0.08), transparent 14%),
-        radial-gradient(circle at 82% 92%, rgba(255,236,179,0.06), transparent 12%);
-      mix-blend-mode: screen;
-    }
-
-    @keyframes bg-move {
-      0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-      50% { background-position: 10% 20%, 100% 80%, 0% 0%, 0% 0%; }
-      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-    }
-
-    /* === CÂU ĐỐI TẾT HAI BÊN === */
-    .homenest-tet-left,
-    .homenest-tet-right {
-      position: fixed;
-      top: 80px; /* Giảm top để phù hợp hơn */
-      width: 180px;
-      z-index: 20;
-      pointer-events: none;
-    }
-    .homenest-tet-left { left: 10px; }
-    .homenest-tet-right { right: 10px; }
-    .homenest-tet-left img,
-    .homenest-tet-right img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Container chính */
-    .container {
-      position: relative;
-      z-index: 10;
-      max-width: 480px;
-      margin: 40px auto;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(10px);
-      padding: 40px 25px;
-      border-radius: 28px;
-      border: 3px solid var(--gold);
-      box-shadow: 0 15px 50px rgba(0,0,0,0.6);
-      text-align: center;
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3em;
-      color: var(--gold);
-      text-shadow: 3px 3px 10px #000, 0 0 20px var(--gold);
-      margin-bottom: 12px;
-    }
-    .subtitle {
-      font-size: 1.3em;
-      color: var(--yellow);
-      margin-bottom: 30px;
-      text-shadow: 1px 1px 6px #000;
-    }
-
-    /* Hoa mai rơi */
-    .petal {
-      position: fixed;
-      width: 12px;
-      height: 12px;
-      background: radial-gradient(circle at 30% 30%, #ffeb3b, #fbc02d);
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-      pointer-events: none;
-      z-index: 5;
-      animation: fall linear forwards;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-    @keyframes fall {
-      to { transform: translateY(120vh) rotate(720deg); opacity: 0; }
-    }
-
-    /* — ĐỊNH NGHĨA HIỆU ỨNG ĐỘNG (KEYFRAMES) — */
-    /* Hiệu ứng rơi từ trên xuống dưới */
-    @keyframes flowers-fall {
-      0% { top: -10%; }
-      100% { top: 100vh; } /* Dùng vh để đảm bảo rơi hết chiều cao màn hình */
-    }
-
-    /* Hiệu ứng lắc lư sang hai bên (giả lập gió thổi) */
-    @keyframes flowers-shake {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(50px); } /* Biên độ lắc 50px */
-    }
-
-    /* — THIẾT LẬP CHUNG CHO HOA — */
-    .flower {
-      position: fixed;
-      top: -10%;
-      z-index: 9999;
-      width: 20px; /* Kích thước hoa */
-      height: auto;
-      -webkit-user-select: none;
-      user-select: none;
-      cursor: default;
-      pointer-events: none; /* Cho phép click xuyên qua hoa */
-      animation-name: flowers-fall, flowers-shake;
-      animation-duration: 10s, 3s;
-      animation-timing-function: linear, ease-in-out;
-      animation-iteration-count: infinite, infinite;
-      animation-play-state: running, running;
-    }
-
-    /* — CẤU HÌNH VỊ TRÍ VÀ ĐỘ TRỄ RIÊNG TỪNG BÔNG — */
-    .flowers .flower:nth-of-type(1) { left: 1%; animation-delay: 0s, 0s; }
-    .flowers .flower:nth-of-type(2) { left: 10%; animation-delay: 1s, 1s; }
-    .flowers .flower:nth-of-type(3) { left: 20%; animation-delay: 6s, 0.5s; }
-    .flowers .flower:nth-of-type(4) { left: 30%; animation-delay: 4s, 2s; }
-    .flowers .flower:nth-of-type(5) { left: 40%; animation-delay: 2s, 2s; }
-    .flowers .flower:nth-of-type(6) { left: 50%; animation-delay: 8s, 3s; }
-    .flowers .flower:nth-of-type(7) { left: 60%; animation-delay: 6s, 2s; }
-    .flowers .flower:nth-of-type(8) { left: 70%; animation-delay: 2.5s, 1s; }
-    .flowers .flower:nth-of-type(9) { left: 80%; animation-delay: 1s, 0s; }
-    .flowers .flower:nth-of-type(10){ left: 90%; animation-delay: 3s, 1.5s; }
-    .flowers .flower:nth-of-type(11){ left: 25%; animation-delay: 2s, 0s; }
-    .flowers .flower:nth-of-type(12){ left: 65%; animation-delay: 4s, 2.5s; }
-
-    /* Tắt hiệu ứng trên màn hình điện thoại để tránh lag máy người dùng */
-    @media (max-width: 768px) {
-      .flower { display: none !important; }
-    }
-
-    input {
-      width: 100%;
-      padding: 16px;
-      font-size: 1.15em;
-      border: 3px solid var(--gold);
-      border-radius: 14px;
-      margin: 15px 0;
-      background: rgba(255,255,255,0.15);
-      color: white;
-      text-align: center;
-    }
-    input::placeholder { color: rgba(255,255,255,0.7); }
-
-    button {
-      padding: 16px 50px;
-      font-size: 1.25em;
-      font-weight: bold;
-      background: linear-gradient(45deg, var(--gold), #f59e0b);
-      color: var(--red-dark);
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      margin: 15px 8px;
-      transition: all 0.3s;
-      box-shadow: 0 6px 20px rgba(251,191,36,0.5);
-    }
-    button:hover {
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 10px 30px rgba(251,191,36,0.7);
-    }
-
-    #envelope {
-      width: 240px;
-      height: 280px;
-      background: var(--red-main);
-      margin: 40px auto;
-      border-radius: 20px 20px 70% 70%/15% 15% 85% 85%;
-      position: relative;
-      cursor: pointer;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.7), inset 0 0 30px rgba(255,255,255,0.2);
-      transition: all 0.4s;
-      display: none;
-    }
-    #envelope:hover {
-      transform: scale(1.08) rotate(3deg);
-    }
-    #envelope::before {
-      content: "";
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0; height: 0;
-      border-left: 120px solid transparent;
-      border-right: 120px solid transparent;
-      border-bottom: 110px solid #e11d48;
-    }
-    #envelope::after {
-      content: "LÌ XÌ";
-      position: absolute;
-      bottom: 35px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 2.4em;
-      font-weight: 900;
-      color: var(--gold);
-      text-shadow: 2px 2px 8px #000;
-      font-family: 'Playfair Display', serif;
-    }
-
-    #result {
-      font-size: 3.5em;
-      font-weight: 900;
-      margin: 50px 0 30px;
-      min-height: 100px;
-      text-shadow: 4px 4px 15px #000, 0 0 30px var(--gold);
-      color: var(--yellow);
-    }
-
-    #admin-section { display:none; margin-top: 50px; padding-top: 30px; border-top: 2px dashed var(--gold); }
-    .code-list {
-      background: rgba(0,0,0,0.3);
-      border-radius: 14px;
-      padding: 15px;
-      margin: 20px 0;
-      max-height: 220px;
-      overflow-y: auto;
-      text-align: left;
-      font-size: 1em;
-    }
-
-    .small-note { font-size: 0.9em; opacity: 0.8; margin-top: 40px; }
-
-    /* === RESPONSIVE === */
-    @media (max-width: 1024px) {
-      .homenest-tet-left,
-      .homenest-tet-right { width: 140px; top: 60px; }
-      h1 { font-size: 2.6em; }
-      .subtitle { font-size: 1.2em; }
-      #envelope { width: 220px; height: 260px; }
-      #envelope::after { font-size: 2.2em; }
-      #result { font-size: 3em; }
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        margin: 20px 10px;
-        padding: 30px 20px;
-        border-radius: 20px;
-      }
-      h1 { font-size: 2.4em; }
-      .subtitle { font-size: 1.1em; margin-bottom: 20px; }
-      input, button { font-size: 1.1em; padding: 14px; }
-      button { padding: 14px 40px; margin: 10px 5px; }
-      #envelope { width: 200px; height: 240px; margin: 30px auto; }
-      #envelope::before { border-left-width: 100px; border-right-width: 100px; border-bottom-width: 95px; top: -50px; }
-      #envelope::after { font-size: 2em; bottom: 30px; }
-      #result { font-size: 2.8em; margin: 40px 0 20px; min-height: 80px; }
-      .petal { width: 10px; height: 10px; } /* Nhẹ hơn trên mobile */
-      .small-note { font-size: 0.85em; }
-    }
-
-    @media (max-width: 1524px) {
-      .homenest-tet-left,
-      .homenest-tet-right { display: none !important; } /* Ẩn câu đối trên màn hình nhỏ hơn 1524px */
-    }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 2.2em; }
-      .container { padding: 25px 15px; }
-      #envelope { width: 180px; height: 220px; }
-      button { width: 100%; margin: 10px 0; padding: 16px; }
+    /* Hide all content immediately when page loads, show only loader */
+    body.content-hidden > a,
+    body.content-hidden > div:not(.loader),
+    body.content-hidden .homenest-tet-left,
+    body.content-hidden .homenest-tet-right,
+    body.content-hidden .flowers,
+    body.content-hidden .container {
+      display: none !important;
     }
   </style>
 </head>
-<body>
+<body class="content-hidden">
+
+<!-- Loader -->
+<div class="loader" id="loader">
+  <div class="loading-text">
+    Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+  </div>
+  <div class="loading-bar-background">
+    <div class="loading-bar">
+      <div class="white-bars-container">
+        <div class="white-bar"></div>
+        <div class="white-bar"></div>
+        <div class="white-bar"></div>
+        <div class="white-bar"></div>
+        <div class="white-bar"></div>
+        <div class="white-bar"></div>
+        <div class="white-bar"></div>
+        <div class="white-bar"></div>
+        <div class="white-bar"></div>
+        <div class="white-bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Câu đối Tết hai bên (chỉ hiện trên PC lớn) -->
 <a class="homenest-tet-left"><img src="https://homenest.com.vn/wp-content/uploads/2025/12/Cau-noi-cau-duoc-uoc-thay.png" alt="Câu đối Tết bên trái"/></a>
@@ -343,6 +85,7 @@
     <input type="text" id="newcode" placeholder="Mã (để trống → tự sinh)" />
     <button onclick="createCode()">Tạo Mã Ngay</button>
 
+    <div id="admin-stats"></div>
     <div class="code-list" id="codes-list"></div>
 
     <button onclick="logoutAdmin()" style="background:#e11d48; color:white;">Thoát Admin</button>
@@ -353,135 +96,6 @@
   </div>
 </div>
 
-<script>
-// CONFIG và code JS giữ nguyên như trước (không thay đổi logic)
-const ADMIN_PASS = "tet2026";
-const KEY_CODES = "lixi_codes_tet2026";
-const KEY_USED  = "lixi_used_tet2026";
-const KEY_ADMIN = "lixi_admin_tet";
-
-let codes = JSON.parse(localStorage.getItem(KEY_CODES)) || {};
-let used  = new Set(JSON.parse(localStorage.getItem(KEY_USED)) || []);
-
-function createPetal() {
-  const petal = document.createElement("div");
-  petal.className = "petal";
-  petal.style.left = Math.random() * 100 + "vw";
-  petal.style.animationDuration = (Math.random() * 8 + 10) + "s";
-  petal.style.opacity = Math.random() * 0.6 + 0.4;
-  petal.style.transform = `rotate(${Math.random()*360}deg)`;
-  document.body.appendChild(petal);
-  setTimeout(() => petal.remove(), 18000);
-}
-setInterval(createPetal, 500); // Giảm tần suất trên mobile nếu cần
-
-// Các hàm admin và bốc lì xì giữ nguyên...
-function loginAdmin() {
-  if (document.getElementById("admin-pass").value.trim() === ADMIN_PASS) {
-    localStorage.setItem(KEY_ADMIN, "1");
-    document.getElementById("admin-login").style.display = "none";
-    document.getElementById("admin-section").style.display = "block";
-    renderCodes();
-  } else {
-    alert("Mật khẩu sai rồi nha!");
-  }
-}
-
-function logoutAdmin() {
-  localStorage.removeItem(KEY_ADMIN);
-  location.reload();
-}
-
-function createCode() {
-  let code = document.getElementById("newcode").value.trim().toUpperCase();
-  if (!code) code = "TET" + Math.random().toString(36).substring(2,8).toUpperCase();
-  if (codes[code]) return alert("Mã này đã có rồi!");
-
-  // Lưu mã (không lưu số tiền) — giá trị true chỉ để đánh dấu tồn tại
-  codes[code] = true;
-  localStorage.setItem(KEY_CODES, JSON.stringify(codes));
-  document.getElementById("newcode").value = "";
-  renderCodes();
-  alert(`Tạo thành công: ${code}`);
-}
-
-function renderCodes() {
-  const el = document.getElementById("codes-list");
-  el.innerHTML = "";
-  Object.keys(codes).forEach((k) => {
-    const mark = used.has(k) ? " <span style='color:#fda4af'>(đã dùng)</span>" : " <span style='color:#bbf7d0'>(chưa dùng)</span>";
-    el.innerHTML += `<div style="padding:8px 0;border-bottom:1px dashed #666;">${k}${mark}</div>`;
-  });
-  if (!Object.keys(codes).length) el.innerHTML = "<em>Chưa có mã nào...</em>";
-}
-
-function checkAndShowEnvelope() {
-  const code = document.getElementById("code").value.trim().toUpperCase();
-  const result = document.getElementById("result");
-  const envelope = document.getElementById("envelope");
-
-  result.innerHTML = "";
-  envelope.style.display = "none";
-
-  if (!code) return alert("Nhập mã lì xì đi bạn ơi!");
-  if (used.has(code)) {
-    result.innerHTML = "Mã này đã được bốc rồi nha!";
-    result.style.color = "#fda4af";
-    return;
-  }
-  if (!codes[code]) {
-    result.innerHTML = "Mã không đúng rồi...";
-    result.style.color = "#fda4af";
-    return;
-  }
-
-  // Tự động rút lì xì ngẫu nhiên ngay khi mã hợp lệ
-  drawRandomLixi(code);
-}
-
-function openLixi() {
-  // Giữ tương thích nếu người dùng vẫn bấm vào phong bao
-  const code = document.getElementById("code").value.trim().toUpperCase();
-  if (!code) return;
-  if (used.has(code)) return;
-  if (!codes[code]) return;
-  drawRandomLixi(code);
-}
-
-function drawRandomLixi(code) {
-  const result = document.getElementById("result");
-  const envelope = document.getElementById("envelope");
-  envelope.style.display = "none";
-  result.innerHTML = "Đang rút lì xì...";
-  result.style.color = "#fbbf24";
-
-  // Các mệnh giá và tỉ lệ (mệnh giá thấp tỉ lệ cao)
-  const choices = [5000, 10000, 20000, 50000];
-  const weights = [0.40, 0.35, 0.15, 0.10];
-
-  setTimeout(() => {
-    // Lấy ngẫu nhiên theo trọng số
-    const r = Math.random();
-    let cum = 0;
-    let chosen = choices[0];
-    for (let i = 0; i < choices.length; i++) {
-      cum += weights[i];
-      if (r <= cum) { chosen = choices[i]; break; }
-    }
-
-    result.innerHTML = chosen.toLocaleString() + " VNĐ";
-
-    used.add(code);
-    localStorage.setItem(KEY_USED, JSON.stringify([...used]));
-    renderCodes();
-  }, 900);
-}
-
-if (localStorage.getItem(KEY_ADMIN) === "1") {
-  document.getElementById("admin-login").style.display = "none";
-  document.getElementById("admin-section").style.display = "block";
-  renderCodes();
-}
-</script>
+<script src="script.js"></script>
 </body>
 </html>
