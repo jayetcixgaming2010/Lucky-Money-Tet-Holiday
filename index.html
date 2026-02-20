@@ -16,11 +16,41 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #991b1b, #c41e3a 50%, #b91c1c);
+      background-color: #b71c1c; /* fallback */
+      background-image:
+        radial-gradient(1200px 600px at -10% 10%, rgba(251,191,36,0.12), transparent 20%),
+        radial-gradient(800px 400px at 110% 90%, rgba(255,255,255,0.06), transparent 20%),
+        linear-gradient(135deg, #b91c1c 0%, #c41e3a 40%, #e11d48 60%, #ff5858 100%),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 20px);
+      background-blend-mode: overlay, screen, normal, overlay;
+      background-attachment: fixed;
       color: white;
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
+      transition: background 0.6s ease;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      animation: bg-move 25s linear infinite;
+    }
+
+    /* subtle overlay lights */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 18% 8%, rgba(255,223,110,0.08), transparent 14%),
+        radial-gradient(circle at 82% 92%, rgba(255,236,179,0.06), transparent 12%);
+      mix-blend-mode: screen;
+    }
+
+    @keyframes bg-move {
+      0% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+      50% { background-position: 10% 20%, 100% 80%, 0% 0%, 0% 0%; }
+      100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
     }
 
     /* === CÂU ĐỐI TẾT HAI BÊN === */
@@ -83,6 +113,56 @@
     }
     @keyframes fall {
       to { transform: translateY(120vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* — ĐỊNH NGHĨA HIỆU ỨNG ĐỘNG (KEYFRAMES) — */
+    /* Hiệu ứng rơi từ trên xuống dưới */
+    @keyframes flowers-fall {
+      0% { top: -10%; }
+      100% { top: 100vh; } /* Dùng vh để đảm bảo rơi hết chiều cao màn hình */
+    }
+
+    /* Hiệu ứng lắc lư sang hai bên (giả lập gió thổi) */
+    @keyframes flowers-shake {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(50px); } /* Biên độ lắc 50px */
+    }
+
+    /* — THIẾT LẬP CHUNG CHO HOA — */
+    .flower {
+      position: fixed;
+      top: -10%;
+      z-index: 9999;
+      width: 20px; /* Kích thước hoa */
+      height: auto;
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: default;
+      pointer-events: none; /* Cho phép click xuyên qua hoa */
+      animation-name: flowers-fall, flowers-shake;
+      animation-duration: 10s, 3s;
+      animation-timing-function: linear, ease-in-out;
+      animation-iteration-count: infinite, infinite;
+      animation-play-state: running, running;
+    }
+
+    /* — CẤU HÌNH VỊ TRÍ VÀ ĐỘ TRỄ RIÊNG TỪNG BÔNG — */
+    .flowers .flower:nth-of-type(1) { left: 1%; animation-delay: 0s, 0s; }
+    .flowers .flower:nth-of-type(2) { left: 10%; animation-delay: 1s, 1s; }
+    .flowers .flower:nth-of-type(3) { left: 20%; animation-delay: 6s, 0.5s; }
+    .flowers .flower:nth-of-type(4) { left: 30%; animation-delay: 4s, 2s; }
+    .flowers .flower:nth-of-type(5) { left: 40%; animation-delay: 2s, 2s; }
+    .flowers .flower:nth-of-type(6) { left: 50%; animation-delay: 8s, 3s; }
+    .flowers .flower:nth-of-type(7) { left: 60%; animation-delay: 6s, 2s; }
+    .flowers .flower:nth-of-type(8) { left: 70%; animation-delay: 2.5s, 1s; }
+    .flowers .flower:nth-of-type(9) { left: 80%; animation-delay: 1s, 0s; }
+    .flowers .flower:nth-of-type(10){ left: 90%; animation-delay: 3s, 1.5s; }
+    .flowers .flower:nth-of-type(11){ left: 25%; animation-delay: 2s, 0s; }
+    .flowers .flower:nth-of-type(12){ left: 65%; animation-delay: 4s, 2.5s; }
+
+    /* Tắt hiệu ứng trên màn hình điện thoại để tránh lag máy người dùng */
+    @media (max-width: 768px) {
+      .flower { display: none !important; }
     }
 
     input {
@@ -224,7 +304,23 @@
 
 <!-- Câu đối Tết hai bên (chỉ hiện trên PC lớn) -->
 <a class="homenest-tet-left"><img src="https://homenest.com.vn/wp-content/uploads/2025/12/Cau-noi-cau-duoc-uoc-thay.png" alt="Câu đối Tết bên trái"/></a>
-<a class="homenest-tet-right"><img src="https://homenest.com.vn/wp-content/uploads/2025/12/Cau-noi-cau-duoc-uoc-thay.png" alt="Câu đối Tết bên phải"/></a>
+<a class="homenest-tet-right"><img src="https://homenest.com.vn/wp-content/uploads/2025/12/Tan-tai-tan-loc-tan-binh-an.png" alt="Câu đối Tết bên phải"/></a>
+
+<!-- Hoa mai rơi (ARIA hidden vì thuần trang trí) -->
+<div class="flowers" aria-hidden="true">
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hinh-anh-hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hinh-anh-hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hinh-anh-hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hinh-anh-hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hinh-anh-hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hinh-anh-hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hinh-anh-hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hinh-anh-hoa-mai-decor-website.png" alt="" />
+  <img class="flower" src="https://homenest.com.vn/wp-content/uploads/2025/12/Hoa-mai-decor-website.png" alt="" />
+</div>
 
 <div class="container">
   <h1>Chúc Mừng Năm Mới<br>Bính Ngọ 2026</h1>
